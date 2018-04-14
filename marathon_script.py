@@ -33,15 +33,15 @@ def get_name_comments(post_id):
     get_comments = vk.wall.getComments(owner_id='-143646422', post_id=post_id, \
                                        count=100, extended=1)
     id_text = {}
-    for item in get_comments["items"]:
+    for item in get_comments['items']:
         if re.findall(r'\[id\d', item['text']): 
             continue
-        tags = re.findall(r'#\w*', item["text"])
-        id_text[item["from_id"]] = tags if tags else item["text"]
+        tags = re.findall(r'#\w*', item['text'])
+        id_text[item['from_id']] = tags if tags else item['text']
     id_name = {}
-    for profil in get_comments["profiles"]:
-        id_name[profil["id"]] = '{} {}'.format(profil["first_name"], \
-                                               profil["last_name"])
+    for profil in get_comments['profiles']:
+        id_name[profil['id']] = '{} {}'.format(profil['first_name'], \
+                                               profil['last_name'])
     name_text = {}
     for key in  list(id_text.keys()):
         name_text[id_name[key]] = id_text[key]
